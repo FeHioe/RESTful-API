@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Get the jquery library -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+
+		<!-- Script for the buttons -->
+		<script>
+			$(document).ready(function(){ 
+			
+			    //For getting all tweets
+			    $("#tweets").click(function(){ 
+				$.get("/getTweets", function(data, status){
+				    
+				    //Filtering the data to nicer format
+				    var filter = "";
+				    var fil = data.substring(1, data.length -1);
+				    var split = fil.split("},");
+				    
+				    for (i= 0; i < split.length; i++){
+				      var cleaned = split[i].trim();
+				      if (cleaned[0] == "{"){
+					cleaned = cleaned.substring(1, cleaned.length);
+				      }
+				      
+				      if (cleaned[cleaned.length - 1] == "}"){
+					cleaned = cleaned.substring(0, cleaned.length - 1);
+				      }			     
+				      
+				      cleaned = cleaned.replace('"create_time":', "Create Time: <br>");
+				      cleaned = cleaned.replace('"id":', "<br><br>Tweet ID: <br>");
+				      cleaned = cleaned.replace('"tweet_text":', "<br><br>Tweet Text: <br>");
+				      
+ 				      filter += "--------------------------- <br><br>" + "Tweet Num " + (i + 1) + " <br><br>" + cleaned + "<br><br>";
+				    }
+				    
+				    document.getElementById('content').innerHTML = filter;
+				});
+			    });
+			    
+			    //For getting all users
+			    $("#users").click(function(){
+				$.get("/getUsers", function(data, status){
+				
+				    //Filtering the data to nicer format
+				    var filter = "";
+				    var fil = data.substring(1, data.length -1);
+				    var split = fil.split("},");
+				    
+				    for (i= 0; i < split.length; i++){
+				      var cleaned = split[i].trim();
+				      if (cleaned[0] == "{"){
+					cleaned = cleaned.substring(1, cleaned.length);
+				      }
+				      
+				      if (cleaned[cleaned.length - 1] == "}"){
+					cleaned = cleaned.substring(0, cleaned.length - 1);
+				      }
+				      
+				      cleaned = cleaned.replace('"username":', "Username: <br>");
+				      cleaned = cleaned.replace('"name":', "<br><br>Name: <br>");
+				      cleaned = cleaned.replace('"description":', "<br><br>Description: <br>");
+				      cleaned = cleaned.replace('"location":', "<br><br>Location: <br>");
+				      cleaned = cleaned.replace('"website":', "<br><br>Website: <br>");
+				      cleaned = cleaned.replace('"in_mentions":', "<br><br>Note: <br>");
+				      
+ 				      filter += "--------------------------- <br><br>" + "User Num " + (i + 1) + " <br><br>" + cleaned + "<br><br>";
+				    }
+				    
+				    document.getElementById('content').innerHTML = filter;
+				});
+			    });
+			    
+			    //For getting all links in tweets
+			    $("#links").click(function(){ 
+				$.get("/getLinks", function(data, status){
+				    //Filtering the data to nicer format
+				    var filter = "";
+				    var fil = data.substring(1, data.length - 1);
+				    var split = fil.split(/},|"urls"/g);
+				    
+				    for (i= 0; i < split.length; i++){
+				      var cleaned = split[i].trim();
+				      if (cleaned[0] == "{"){
+					cleaned = cleaned.substring(1, cleaned.length);
+				      }
+				      
+				      if (cleaned[cleaned.length - 1] == "}"){
+					cleaned = cleaned.substring(0, cleaned.length - 1);
+				      }
+				      
+				      if (cleaned[0] == ":"){
+					cleaned = cleaned.substring(8, cleaned.length);
+				      }
+				      
+				      if (cleaned[cleaned.length - 1] == "]"){
+					cleaned = cleaned.substring(0, cleaned.length - 5);
+				      }
+				      
+				      if (cleaned[cleaned.length - 1] == ","){
+					filter += "--------------------------- <br><br>" + cleaned + "<br><br>";
+				      } else {
+					filter += cleaned + "<br><br>";
+				      }
+				    }
+				    document.getElementById('content').innerHTML = filter;
+				});
+			    });
+			    
+			    //For finding a tweet by ID
+			    $("#findtweet").click(function(){
+				var tweetid = document.getElementById("tweetInput").value;
+				$.get("/findTweet/" + tweetid, function(data, status){
+				  //Filtering the data to nicer format
+				  var cleaned = data.substring(1, data.length -1);
+				  cleaned = cleaned.replace('"create_time":', "<br><br>Create Time: <br>");
+				  cleaned = cleaned.replace('"username":', "Tweeted By: <br>");
+				  cleaned = cleaned.replace('"tweet_text":', "<br><br>Tweet Text: <br>");
+				  
+				  document.getElementById('content').innerHTML = cleaned;
+				});
+
+
+			    });
+			    
+			    //For finding a user by screen name
+			    $("#finduser").click(function(){ 
+				var userid = document.getElementById("userInput").value;
+				$.get("/findUser/" + userid, function(data, status){
+				  //Filtering the data to nicer format
+				  var cleaned = data.substring(1, data.length -1);
+				  cleaned = cleaned.replace('"username":', "Username: <br>");
+				  cleaned = cleaned.replace('"name":', "<br><br>Name: <br>");
+				  cleaned = cleaned.replace('"description":', "<br><br>Description: <br>");
+				  cleaned = cleaned.replace('"location":', "<br><br>Location: <br>");
+				  cleaned = cleaned.replace('"website":', "<br><br>Website: <br>");
+				  cleaned = cleaned.replace('"in_mentions":', "<br><br>Note: <br>");
+				  
+				  document.getElementById('content').innerHTML = cleaned;
+				});
+
+			    });
+
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<!-- For simplicity, one CSS line is included with the HTML file -->
+		<div class="button_holder" style="text-align: center"> 
+			<button id="tweets">Get Tweets</button>
+			<button id="users">Get Users</button>
+			<button id="links">Get Links</button> <br><br>
+			<button id="findtweet">Find Tweet</button>
+			<form action="findt">
+			  Find Tweet: <input type="text" name="tweet" id="tweetInput">
+			</form>
+			<button id="finduser">Find User</button>
+			<form action="findu">
+			  Find User: <input type="text" name="find_user" id="userInput">
+			</form>
+		</div>
+		<div>
+		<p> Click any of the above buttons to summon Twitter information. Enter a TweetID and click Find Tweet to find a specific tweet, and enter a user's screen name and click Find User to find a specific user.
+		Users who are only mentioned in the archive have will have an extra field to note that they lack some user information. Content will be shown below.</p>
+		</div>
+		<div id="content"></div>
+	</body>
+</html>

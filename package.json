@@ -1,0 +1,23 @@
+{
+  
+"name": "restapi",
+  
+"version": "1.0.0",
+  
+"description": "A basic RESTful API that uses HTTP requests.",
+  
+"main": "Node.js",
+  
+"scripts": {
+    
+	"start": "node Node.js"
+	 },
+  
+"author": "Felicia Hioe",
+  
+"license": "ISC", 
+"engines": { 
+	"node": "4.1.1"
+	}
+
+}
