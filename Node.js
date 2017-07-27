@@ -181,7 +181,7 @@ var path = url.parse(request.url).pathname;
             response.end(file, "utf-8");  
         });
     }
-}).listen(3000);
+}).listen(process.env.PORT || 3000);
 
 // Server has loaded properly
 console.log('Server running at localhost:3000');
