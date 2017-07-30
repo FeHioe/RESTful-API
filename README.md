@@ -7,9 +7,13 @@ If running the app locally, run node on the Node.js file and access the web page
 - Get Tweets - http://127.0.0.1:3000/getTweets
 - Get Users - http://127.0.0.1:3000/getUsers
 - Get Links - http://127.0.0.1:3000/getLinks
-- Find Tweet - http://127.0.0.1:3000/findTweet/(insert tweet id here)
-- Find User - http://127.0.0.1:3000/findUser/(insert screen name here)
+- Find Tweet - http://127.0.0.1:3000/findTweet/<tweetID>
+- Find User - http://127.0.0.1:3000/findUser/<screenname>
 
-If running the app on heroku, replace http://127.0.0.1:3000 with https://restful-api-demo.herokuapp.com/ to access the HTTPS requests.
+If running the app on the demo(https://restful-api-demo.herokuapp.com/), the following can be used to access the HTTPS requests.
 
-Demo: https://restful-api-demo.herokuapp.com/
+- Get Tweets - https://restful-api-demo.herokuapp.com/getTweets
+- Get Users - https://restful-api-demo.herokuapp.com/getUsers
+- Get Links - https://restful-api-demo.herokuapp.com/getLinks
+- Find Tweet - https://restful-api-demo.herokuapp.com/findTweet/<tweetID>
+- Find User - https://restful-api-demo.herokuapp.com/findUser/<screenname>
