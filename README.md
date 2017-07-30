@@ -4,15 +4,11 @@ A basic web application that demonstrates RESTful web services using a Twitter d
 
 If running the app locally, run node on the Node.js file and access the web page on localhost/3000 or http://127.0.0.1:3000. The five functions can be accessed with the following HTTPS requests:
 
-Get Tweets - http://127.0.0.1:3000/getTweets
-
-Get Users - http://127.0.0.1:3000/getUsers
-
-Get Links - http://127.0.0.1:3000/getLinks
-
-Find Tweet - http://127.0.0.1:3000/findTweet/(insert tweet id here)
-
-Find User - http://127.0.0.1:3000/findUser/(insert screen name here)
+- Get Tweets - http://127.0.0.1:3000/getTweets
+- Get Users - http://127.0.0.1:3000/getUsers
+- Get Links - http://127.0.0.1:3000/getLinks
+- Find Tweet - http://127.0.0.1:3000/findTweet/(insert tweet id here)
+- Find User - http://127.0.0.1:3000/findUser/(insert screen name here)
 
 If running the app on heroku, replace http://127.0.0.1:3000 with https://restful-api-demo.herokuapp.com/ to access the HTTPS requests.
 
