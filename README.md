@@ -15,3 +15,4 @@ Find Tweet - http://127.0.0.1:3000/findTweet/(insert tweet id here)
 Find User - http://127.0.0.1:3000/findUser/(insert screen name here)
 
 If running the app on heroku, replace http://127.0.0.1:3000 with https://restful-api-demo.herokuapp.com/ to access the HTTPS requests.
+Demo: https://restful-api-demo.herokuapp.com/
